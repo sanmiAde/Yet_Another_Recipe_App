@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="TextAppearance.YetAnotherRecipeApp.Headline1" parent="TextAppearance.MaterialComponents.Headline1">
+        <!--Your custom type style here-->
+    </style>
+
+    <style name="TextAppearance.YetAnotherRecipeApp.Headline2" parent="TextAppearance.MaterialComponents.Headline2">
+        <!--Your custom type style here-->
+    </style>
+
+    <style name="TextAppearance.YetAnotherRecipeApp.Headline3" parent="TextAppearance.MaterialComponents.Headline3">
+        <!--Your custom type style here-->
+    </style>
+
+    <style name="TextAppearance.YetAnotherRecipeApp.Headline4" parent="TextAppearance.MaterialComponents.Headline4">
+        <!--Your custom type style here-->
+    </style>
+
+    <style name="TextAppearance.YetAnotherRecipeApp.Headline5" parent="TextAppearance.MaterialComponents.Headline5">
+        <!--Your custom type style here-->
+    </style>
+
+    <style name="TextAppearance.YetAnotherRecipeApp.Headline6" parent="TextAppearance.MaterialComponents.Headline6">
+        <!--Your custom type style here-->
+    </style>
+
+    <style name="TextAppearance.YetAnotherRecipeApp.Subtitle1" parent="TextAppearance.MaterialComponents.Subtitle1">
+        <!--Your custom type style here-->
+    </style>
+
+    <style name="TextAppearance.YetAnotherRecipeApp.Subtitle2" parent="TextAppearance.MaterialComponents.Subtitle2">
+        <!--Your custom type style here-->
+    </style>
+
+    <style name="TextAppearance.YetAnotherRecipeApp.Body1" parent="TextAppearance.MaterialComponents.Body1">
+        <!--Your custom type style here-->
+    </style>
+
+    <style name="TextAppearance.YetAnotherRecipeApp.Body2" parent="TextAppearance.MaterialComponents.Body2">
+        <!--Your custom type style here-->
+    </style>
+
+    <style name="TextAppearance.YetAnotherRecipeApp.Button" parent="TextAppearance.MaterialComponents.Button">
+        <!--Your custom type style here-->
+    </style>
+
+    <style name="TextAppearance.YetAnotherRecipeApp.Caption" parent="TextAppearance.MaterialComponents.Caption">
+        <!--Your custom type style here-->
+    </style>
+
+    <style name="TextAppearance.YetAnotherRecipeApp.Overline" parent="TextAppearance.MaterialComponents.Overline">
+        <!--Your custom type style here-->
+    </style>
+</resources>

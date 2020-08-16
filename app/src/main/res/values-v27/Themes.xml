@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?><?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="Theme.YetAnotherRecipe" parent="BaseTheme.YetAnotherRecipeApp">
+
+    </style>
+
+    <style name="BaseTheme.YetAnotherRecipeApp" parent="Theme.YetAnotherRecipeAppThemeBuilder">
+
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/colour_blue_800</item>
+        <item name="colorPrimaryVariant">@color/colour_blue_900</item>
+        <item name="colorSecondary">@color/colour_red_900</item>
+        <item name="colorOnPrimary">@color/colour_white_900</item>
+        <item name="colorOnSecondary">@color/colour_black_900</item>
+        <item name="colorSurface">@color/colour_white_900</item>
+        <item name="colorOnSurface">@color/colour_black_900</item>
+        <item name="android:colorBackground">@color/colour_white_900</item>
+
+
+        <!--Material type attributes-->
+        <item name="textAppearanceHeadline1">@style/TextAppearance.YetAnotherRecipeApp.Headline1
+        </item>
+        <item name="textAppearanceHeadline2">@style/TextAppearance.YetAnotherRecipeApp.Headline2
+        </item>
+        <item name="textAppearanceHeadline3">@style/TextAppearance.YetAnotherRecipeApp.Headline3
+        </item>
+        <item name="textAppearanceHeadline4">@style/TextAppearance.YetAnotherRecipeApp.Headline4
+        </item>
+        <item name="textAppearanceHeadline5">@style/TextAppearance.YetAnotherRecipeApp.Headline5
+        </item>
+        <item name="textAppearanceHeadline6">@style/TextAppearance.YetAnotherRecipeApp.Headline6
+        </item>
+        <item name="textAppearanceSubtitle1">@style/TextAppearance.YetAnotherRecipeApp.Subtitle1
+        </item>
+        <item name="textAppearanceSubtitle2">@style/TextAppearance.YetAnotherRecipeApp.Subtitle2
+        </item>
+        <item name="textAppearanceBody1">@style/TextAppearance.YetAnotherRecipeApp.Body1</item>
+        <item name="textAppearanceBody2">@style/TextAppearance.YetAnotherRecipeApp.Body2</item>
+        <item name="textAppearanceButton">@style/TextAppearance.YetAnotherRecipeApp.Button</item>
+        <item name="textAppearanceCaption">@style/TextAppearance.YetAnotherRecipeApp.Caption</item>
+        <item name="textAppearanceOverline">@style/TextAppearance.YetAnotherRecipeApp.Overline
+        </item>
+
+        <!-- shapes -->
+        <item name="shapeAppearanceSmallComponent">
+            @style/ShapeAppearance.YetAnotherRecipeApp.SmallComponent
+        </item>
+        <item name="shapeAppearanceMediumComponent">
+            @style/ShapeAppearance.YetAnotherRecipeApp.MediumComponent
+        </item>
+        <item name="shapeAppearanceLargeComponent">
+            @style/ShapeAppearance.YetAnotherRecipeApp.LargeComponent
+        </item>
+
+        <!--Components -->
+        <item name="textInputStyle">@style/Theme.YetAnotherRecipeApp.TextInpuLayout</item>
+    </style>
+
+
+    <style name="Theme.YetAnotherRecipeAppThemeBuilder" parent="Theme.MaterialComponents.Light.NoActionBar">
+        <item name="android:statusBarColor">?attr/colorSurface</item>
+        <item name="android:windowLightStatusBar">true</item>
+        <item name="android:navigationBarColor">?android:attr/colorBackground</item>
+        <item name="android:windowLightNavigationBar">true</item>
+        <item name="android:navigationBarDividerColor">
+            ?attr/colorControlHighlight
+        </item>
+    </style>
+
+
+</resources>
