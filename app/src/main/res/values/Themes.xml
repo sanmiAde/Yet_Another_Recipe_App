@@ -13,7 +13,7 @@
         <item name="colorSecondary">@color/colour_red_900</item>
         <item name="colorOnPrimary">@color/colour_white_900</item>
         <item name="colorOnSecondary">@color/colour_black_900</item>
-        <item name="colorSurface">@color/colour_white_900</item>
+        <item name="colorSurface">@color/colour_grey_700</item>
         <item name="colorOnSurface">@color/colour_black_900</item>
         <item name="android:colorBackground">@color/colour_white_900</item>
 
@@ -54,7 +54,8 @@
         </item>
 
         <!--Components -->
-        <item name="textInputStyle">@style/Theme.YetAnotherRecipeApp.TextInpuLayout</item>
+        <item name="textInputStyle">@style/Widget.YetAnotherRecipeApp.TextInputLayout</item>
+        <item name="toolbarStyle">@style/Widget.YetAnotherRecipeApp.Toolbar</item>
     </style>
 
 

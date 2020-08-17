@@ -1,7 +1,13 @@
 <resources>
-    
-    <style name="Theme.YetAnotherRecipeApp.TextInpuLayout" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox">
 
+    <style name="Widget.YetAnotherRecipeApp.TextInputLayout" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+
+    </style>
+
+    <style name="Widget.YetAnotherRecipeApp.Toolbar" parent="Widget.MaterialComponents.Toolbar">
+        <item name="background">@color/colour_white_900</item>
+        <item name="elevation">@dimen/eight</item>
+        <item name="titleTextAppearance">@style/TextAppearance.YetAnotherRecipeApp.Headline6</item>
     </style>
 
 </resources>

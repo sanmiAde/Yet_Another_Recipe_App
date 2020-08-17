@@ -23,7 +23,7 @@ android {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
-            buildConfigField "String", "BASE_URL",  '"https://www.themealdb.com/api.php"'
+            buildConfigField "String", "BASE_URL",  '"https://www.themealdb.com/"'
         }
 
         debug {
@@ -32,7 +32,7 @@ android {
             shrinkResources false
             applicationIdSuffix = '.debug'
             versionNameSuffix = '.debug'
-            buildConfigField "String", "BASE_URL", '"https://www.themealdb.com/api.php"'
+            buildConfigField "String", "BASE_URL", '"https://www.themealdb.com/"'
 
         }
     }
