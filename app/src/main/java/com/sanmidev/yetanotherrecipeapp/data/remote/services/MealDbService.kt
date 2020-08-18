@@ -1,6 +1,7 @@
 package com.sanmidev.yetanotherrecipeapp.data.remote.services
 
 import com.sanmidev.yetanotherrecipeapp.data.remote.response.categories.CategoryListResponse
+import com.sanmidev.yetanotherrecipeapp.data.remote.response.mealDetail.MealDetailListResponse
 import com.sanmidev.yetanotherrecipeapp.data.remote.response.meals.MealListResponse
 import io.reactivex.Single
 import retrofit2.http.GET
@@ -13,4 +14,7 @@ interface MealDbService {
 
     @GET("/api/json/v1/1/filter.php")
     fun getMeals(@Query("c") category: String): Single<MealListResponse>
+
+    @GET("/api/json/v1/1/lookup.php")
+    fun getMealDetail(@Query("i") id: String): Single<MealDetailListResponse>
 }

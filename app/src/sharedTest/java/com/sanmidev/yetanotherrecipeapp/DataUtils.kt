@@ -5,8 +5,11 @@ import com.sanmidev.yetanotherrecipeapp.data.local.model.category.MealListModel
 import com.sanmidev.yetanotherrecipeapp.data.local.model.category.MealModel
 import com.sanmidev.yetanotherrecipeapp.data.local.model.categoryList.CategoryListModel
 import com.sanmidev.yetanotherrecipeapp.data.local.model.categoryList.CategoryModel
+import com.sanmidev.yetanotherrecipeapp.data.local.model.mealDetail.MealDetailModel
 import com.sanmidev.yetanotherrecipeapp.data.remote.response.categories.CategoryListResponse
 import com.sanmidev.yetanotherrecipeapp.data.remote.response.categories.CategoryResponse
+import com.sanmidev.yetanotherrecipeapp.data.remote.response.mealDetail.MealDetailListResponse
+import com.sanmidev.yetanotherrecipeapp.data.remote.response.mealDetail.MealDetailResponse
 import com.sanmidev.yetanotherrecipeapp.data.remote.response.meals.MealListResponse
 import com.sanmidev.yetanotherrecipeapp.data.remote.response.meals.MealResponse
 
@@ -16,6 +19,8 @@ object DataUtils {
 
     val categoriesData = provideCategories()
     val mealsData = provideMealsTestData()
+    val mealDetailData = provideMealDetailData()
+
 
     fun provideCategory(): Pair<CategoryResponse, CategoryModel> {
         val id = faker.idNumber().valid()
@@ -87,6 +92,80 @@ object DataUtils {
         val mealListModel = MealListModel(mealsModels)
 
         return Pair(mealsResponseList, mealListModel)
+    }
+
+
+    fun provideMealDetailData(): Triple<MealDetailListResponse, MealDetailResponse, MealDetailModel> {
+
+        val id = faker.idNumber().valid()
+        val name = faker.name().firstName()
+        val image = faker.internet().image()
+        val instruction = faker.address().buildingNumber()
+        val youtubeLink = faker.internet().image()
+
+
+        val mealDetailResponse = MealDetailResponse(
+            faker.animal().name(),
+            faker.dog().breed(),
+            faker.animal().name(),
+            faker.dog().age(),
+            faker.animal().name(),
+            faker.dog().breed(),
+            faker.animal().name(),
+            faker.dog().breed(),
+            faker.animal().name(),
+            faker.dog().age(),
+            faker.animal().name(),
+            faker.dog().breed(),
+            faker.animal().name(),
+            faker.dog().breed(),
+            faker.animal().name(),
+            faker.dog().age(),
+            faker.animal().name(),
+            faker.dog().breed(),
+            faker.animal().name(),
+            faker.dog().breed(),
+            faker.animal().name(),
+            faker.dog().age(),
+            faker.animal().name(),
+            faker.dog().breed(),
+            faker.animal().name(),
+            faker.dog().breed(),
+            faker.animal().name(),
+            faker.dog().age(),
+            faker.animal().name(),
+            faker.dog().breed(),
+            faker.animal().name(),
+            faker.dog().breed(),
+            faker.animal().name(),
+            faker.dog().age(),
+            faker.animal().name(),
+            faker.dog().breed(),
+            faker.animal().name(),
+            faker.dog().breed(),
+            faker.animal().name(),
+            faker.dog().age(),
+            faker.animal().name(),
+            faker.dog().breed(),
+            faker.animal().name(),
+            faker.dog().breed(),
+            faker.animal().name(),
+            faker.dog().age(),
+            strYoutube = youtubeLink,
+            idMeal = id,
+            strInstructions = instruction,
+            strMealThumb = image,
+            strMeal = name
+
+        )
+
+        val mealDetailModel = MealDetailModel(id, name, image, instruction, youtubeLink)
+
+        val mealDetailListResponse = MealDetailListResponse(listOf(mealDetailResponse))
+
+        return Triple(mealDetailListResponse, mealDetailResponse, mealDetailModel)
+
+
     }
 
 

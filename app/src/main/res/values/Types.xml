@@ -52,4 +52,14 @@
     <style name="TextAppearance.YetAnotherRecipeApp.Overline" parent="TextAppearance.MaterialComponents.Overline">
         <!--Your custom type style here-->
     </style>
+
+    <style name="TextAppearance.YetAnotherRecipeApp.CollapsingToolbar.Expanded" parent="TextAppearance.MaterialComponents.Headline5">
+        <item name="android:textSize">1dp</item>
+        <item name="android:textColor">@color/colour_black_900</item>
+    </style>
+
+    <style name="TextAppearance.YetAnotherRecipeApp.CollapsingToolbar.Collapsed" parent="TextAppearance.MaterialComponents.Headline6">
+        <item name="android:textSize">18dp</item>
+        <item name="android:textColor">@color/colour_black_900</item>
+    </style>
 </resources>

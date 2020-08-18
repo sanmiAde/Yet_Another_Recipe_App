@@ -5,6 +5,9 @@
     <dimen name="four">4dp</dimen>
     <dimen name="sixteen">16dp</dimen>
     <dimen name="twentyfour">24dp</dimen>
-    <dimen name="card_height">300dp</dimen>
-    <dimen name="card_width">300dp</dimen>
+    <dimen name="card_height">200dp</dimen>
+    <dimen name="card_width">180dp</dimen>
+    <dimen name="seventwo">72dp</dimen>
+    <dimen name="twentyeight">28dp</dimen>
+    <dimen name="fourHundred">400dp</dimen>
 </resources>

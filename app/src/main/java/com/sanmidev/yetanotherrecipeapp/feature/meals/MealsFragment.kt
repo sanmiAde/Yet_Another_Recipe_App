@@ -7,6 +7,7 @@ import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.observe
+import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -40,6 +41,8 @@ class MealsFragment : Fragment(R.layout.fragment_meals) {
         vmFactory.createFactory(this, bundle)
     }
 
+    private val navController by lazy { findNavController() }
+
     override fun onAttach(context: Context) {
         super.onAttach(context)
 
@@ -50,7 +53,6 @@ class MealsFragment : Fragment(R.layout.fragment_meals) {
         super.onViewCreated(view, savedInstanceState)
 
         fragmentMealsBinding = FragmentMealsBinding.bind(view)
-
 
         initViews()
         observeGetMealLiveData()
@@ -84,8 +86,11 @@ class MealsFragment : Fragment(R.layout.fragment_meals) {
         binding.layoutToolbar.toolbar.initToolbarBackButton(requireActivity())
 
         //adapter
-        mealsAdapter = MealLIstAdapter(this.layoutInflater) {
-
+        mealsAdapter = MealLIstAdapter(this.layoutInflater)
+        { id: String, image: String ->
+            val directions =
+                MealsFragmentDirections.actionMealsFragmentToMealDetailFragment(id, image)
+            navController.navigateSafely(directions)
         }
 
         //Recyclerview

@@ -4,8 +4,10 @@ import com.sanmidev.yetanotherrecipeapp.data.local.model.category.MealListModel
 import com.sanmidev.yetanotherrecipeapp.data.local.model.category.MealModel
 import com.sanmidev.yetanotherrecipeapp.data.local.model.categoryList.CategoryListModel
 import com.sanmidev.yetanotherrecipeapp.data.local.model.categoryList.CategoryModel
+import com.sanmidev.yetanotherrecipeapp.data.local.model.mealDetail.MealDetailModel
 import com.sanmidev.yetanotherrecipeapp.data.remote.response.categories.CategoryListResponse
 import com.sanmidev.yetanotherrecipeapp.data.remote.response.categories.CategoryResponse
+import com.sanmidev.yetanotherrecipeapp.data.remote.response.mealDetail.MealDetailResponse
 import com.sanmidev.yetanotherrecipeapp.data.remote.response.meals.MealListResponse
 import com.sanmidev.yetanotherrecipeapp.data.remote.response.meals.MealResponse
 import javax.inject.Inject
@@ -42,6 +44,18 @@ class MealsDBMapper @Inject constructor() {
     fun mapMealListReponseToMealListModel(mealListResponse: MealListResponse): MealListModel {
         val mealsModelList = mealListResponse.meals.map { mapMealResponseToMealModel(it) }
         return MealListModel(mealsModelList)
+    }
+
+    fun mealDetailResponseToMealDetailModel(mealDetailResponse: MealDetailResponse): MealDetailModel {
+        return with(mealDetailResponse) {
+            MealDetailModel(
+                idMeal ?: "not found",
+                strMeal ?: "not found",
+                strMealThumb ?: "not found",
+                strInstructions ?: "not found",
+                strYoutube ?: "not found"
+            )
+        }
     }
 
 

@@ -2,8 +2,10 @@ package com.sanmidev.yetanotherrecipeapp.data.remote.repo
 
 import com.sanmidev.yetanotherrecipeapp.data.local.model.category.MealListModel
 import com.sanmidev.yetanotherrecipeapp.data.local.model.categoryList.CategoryListModel
+import com.sanmidev.yetanotherrecipeapp.data.local.model.mealDetail.MealDetailModel
 import com.sanmidev.yetanotherrecipeapp.data.remote.mapper.MealsDBMapper
 import com.sanmidev.yetanotherrecipeapp.data.remote.response.categories.CategoryListResponse
+import com.sanmidev.yetanotherrecipeapp.data.remote.response.mealDetail.MealDetailListResponse
 import com.sanmidev.yetanotherrecipeapp.data.remote.response.meals.MealListResponse
 import com.sanmidev.yetanotherrecipeapp.data.remote.services.MealDbService
 import io.reactivex.Single
@@ -25,6 +27,12 @@ class MeallDBRepositoryImpl @Inject constructor(
     override fun getMeals(category: String): Single<MealListModel> {
         return mealDbService.getMeals(category).map { mealListReponse: MealListResponse ->
             mapper.mapMealListReponseToMealListModel(mealListReponse)
+        }
+    }
+
+    override fun getMealDetail(id: String): Single<MealDetailModel> {
+        return mealDbService.getMealDetail(id).map { mealDetailList: MealDetailListResponse ->
+            mapper.mealDetailResponseToMealDetailModel(mealDetailList.meals[0])
         }
     }
 

@@ -42,5 +42,23 @@
         <argument
             android:name="name"
             app:argType="string" />
+        <action
+            android:id="@+id/action_mealsFragment_to_mealDetailFragment"
+            app:destination="@id/mealDetailFragment"
+            app:enterAnim="@anim/fragment_close_enter"
+            app:exitAnim="@anim/fragment_close_exit"
+            app:popEnterAnim="@anim/fragment_close_enter"
+            app:popExitAnim="@anim/fragment_close_exit" />
+    </fragment>
+    <fragment
+        android:id="@+id/mealDetailFragment"
+        android:name="com.sanmidev.yetanotherrecipeapp.feature.mealDetail.MealDetailFragment"
+        android:label="MealDetailFragment">
+        <argument
+            android:name="id"
+            app:argType="string" />
+        <argument
+            android:name="imageLink"
+            app:argType="string" />
     </fragment>
 </navigation>

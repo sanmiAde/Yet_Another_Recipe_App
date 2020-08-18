@@ -5,4 +5,6 @@
     <string name="categories_error_txt">Could Not Get List of Categries</string>
     <string name="categories_txt">Categories</string>
     <string name="meals_list_error_txt">Could Not Get List of Meals.</string>
+    <string name="no_meal_detail_error">Could not find meal detail</string>
+    <string name="shimmer_text">Loads of text, Loads of text, Loads of text, Loads of text, Loads of text</string>
 </resources>

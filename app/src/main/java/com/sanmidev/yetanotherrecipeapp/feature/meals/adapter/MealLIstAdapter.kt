@@ -7,7 +7,7 @@ import androidx.recyclerview.widget.ListAdapter
 import com.sanmidev.yetanotherrecipeapp.data.local.model.category.MealModel
 import com.sanmidev.yetanotherrecipeapp.databinding.MealListItemBinding
 
-typealias OnMealImageClickCallback = (String) -> Unit
+typealias OnMealImageClickCallback = (String, String) -> Unit
 
 class MealLIstAdapter(
     private val layoutInflater: LayoutInflater,
@@ -18,8 +18,9 @@ class MealLIstAdapter(
 
         val viewHolder = MealListViewHolder(binding)
 
-        binding.root.setOnClickListener {
-            onImageOnClickCallback.invoke(getItem(viewHolder.adapterPosition).id)
+        binding.card.setOnClickListener {
+            val item = getItem(viewHolder.adapterPosition)
+            onImageOnClickCallback.invoke(item.id, item.image)
         }
         return viewHolder
     }

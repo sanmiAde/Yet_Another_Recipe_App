@@ -36,7 +36,7 @@ class MealsViewModelTest {
     @Test
     fun getMealsList_shouldReturnListOfMeal_RequestIsSuccessful() {
         //GIVEN
-        mockWebServer.dispatcher = NetworkUtils.getMealsMockWebserverDispatcher()
+        mockWebServer.dispatcher = NetworkUtils.getMockWebserverDispatcher()
 
         val savedStateHandle = SavedStateHandle()
         savedStateHandle.set(MealsViewModel.MEAL_LIST_NAME, NetworkUtils.MEAL_PATH_QUERY_PARAM)
@@ -53,7 +53,7 @@ class MealsViewModelTest {
     @Test
     fun getMealsList_shouldReturnResultError_RequestFails() {
         //GIVEN
-        mockWebServer.dispatcher = NetworkUtils.getMealsMockWebserverDispatcher()
+        mockWebServer.dispatcher = NetworkUtils.getMockWebserverDispatcher()
 
         val savedStateHandle = SavedStateHandle()
         savedStateHandle.set(MealsViewModel.MEAL_LIST_NAME, "Wrong")

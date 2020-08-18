@@ -6,8 +6,11 @@ import com.sanmidev.yetanotherrecipeapp.data.local.model.category.MealListModel
 import com.sanmidev.yetanotherrecipeapp.data.local.model.category.MealModel
 import com.sanmidev.yetanotherrecipeapp.data.local.model.categoryList.CategoryListModel
 import com.sanmidev.yetanotherrecipeapp.data.local.model.categoryList.CategoryModel
+import com.sanmidev.yetanotherrecipeapp.data.local.model.mealDetail.MealDetailModel
 import com.sanmidev.yetanotherrecipeapp.data.remote.response.categories.CategoryListResponse
 import com.sanmidev.yetanotherrecipeapp.data.remote.response.categories.CategoryResponse
+import com.sanmidev.yetanotherrecipeapp.data.remote.response.mealDetail.MealDetailListResponse
+import com.sanmidev.yetanotherrecipeapp.data.remote.response.mealDetail.MealDetailResponse
 import com.sanmidev.yetanotherrecipeapp.data.remote.response.meals.MealListResponse
 import com.sanmidev.yetanotherrecipeapp.data.remote.response.meals.MealResponse
 import org.junit.After
@@ -22,6 +25,7 @@ class MealsMapperTest {
     lateinit var categoryListTestData: Pair<CategoryListResponse, CategoryListModel>
     lateinit var mealListTestData: Pair<MealListResponse, MealListModel>
     lateinit var mealTestData: Pair<MealResponse, MealModel>
+    lateinit var mealDetailTestData: Triple<MealDetailListResponse, MealDetailResponse, MealDetailModel>
 
 
     @Before
@@ -31,6 +35,7 @@ class MealsMapperTest {
         categoryListTestData = DataUtils.provideCategories()
         mealTestData = DataUtils.provideMeal()
         mealListTestData = DataUtils.provideMealsTestData()
+        mealDetailTestData = DataUtils.provideMealDetailData()
     }
 
     @Test
@@ -97,6 +102,28 @@ class MealsMapperTest {
         Truth.assertThat(actualMealListModel.meals)
             .containsExactlyElementsIn(expectedMealListModel.meals)
     }
+
+
+    @Test
+    fun mapMealDetailResponse_shouldReturnMealDetailModel() {
+        //GIVEN
+        val expectedMealDetailModel = mealDetailTestData.third
+
+        //WHEN
+        val actualMealDetailModel =
+            CUT.mealDetailResponseToMealDetailModel(mealDetailTestData.second)
+
+        //THEN
+        Truth.assertThat(actualMealDetailModel.id).isEqualTo(expectedMealDetailModel.id)
+        Truth.assertThat(actualMealDetailModel.name).isEqualTo(expectedMealDetailModel.name)
+        Truth.assertThat(actualMealDetailModel.image).isEqualTo(expectedMealDetailModel.image)
+        Truth.assertThat(actualMealDetailModel.instruction)
+            .isEqualTo(expectedMealDetailModel.instruction)
+        Truth.assertThat(actualMealDetailModel.youtubeLink)
+            .isEqualTo(expectedMealDetailModel.youtubeLink)
+
+    }
+
 
     @After
     fun tearDown() {
