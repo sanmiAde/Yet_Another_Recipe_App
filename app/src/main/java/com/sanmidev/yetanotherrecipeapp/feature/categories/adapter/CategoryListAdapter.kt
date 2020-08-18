@@ -3,7 +3,7 @@ package com.sanmidev.yetanotherrecipeapp.feature.categories.adapter
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.ListAdapter
-import com.sanmidev.yetanotherrecipeapp.data.local.model.CategoryModel
+import com.sanmidev.yetanotherrecipeapp.data.local.model.categoryList.CategoryModel
 import com.sanmidev.yetanotherrecipeapp.databinding.CategoryListItemBinding
 
 typealias CategoryImageOnClickCallback = (CategoryModel) -> Unit

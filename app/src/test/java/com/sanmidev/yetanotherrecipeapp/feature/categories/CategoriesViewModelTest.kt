@@ -33,7 +33,7 @@ class CategoriesViewModelTest {
     private val repo = RepositoryUtils.provideMealsDbRepostory(mockWebServer)
     private val testSchedulers = TestSchedulers()
     private val savedStateHandle = SavedStateHandle()
-    private val dispacher = NetworkUtils.getMockWebserverDispatcher()
+    private val dispacher = NetworkUtils.getCategoriesMockWebserverDispatcher()
 
     @Before
     fun setUp() {

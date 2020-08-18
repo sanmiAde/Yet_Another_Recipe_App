@@ -1,7 +1,9 @@
 package com.sanmidev.yetanotherrecipeapp
 
 import com.sanmidev.yetanotherrecipeapp.DataUtils.categoriesData
-import com.sanmidev.yetanotherrecipeapp.data.remote.response.CategoryListResponseJsonAdapter
+import com.sanmidev.yetanotherrecipeapp.data.remote.response.categories.CategoryListResponseJsonAdapter
+import com.sanmidev.yetanotherrecipeapp.data.remote.response.meals.MealListResponseJsonAdapter
+
 import com.sanmidev.yetanotherrecipeapp.data.remote.services.MealDbService
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
@@ -16,12 +18,16 @@ import java.net.HttpURLConnection
 
 object NetworkUtils {
     const val CATEGORIES_LIST_PATH = "/api/json/v1/1/categories.php"
+    const val MEAL_PATH_QUERY_PARAM = "Seafood"
+    const val MEAL_PATH = "/api/json/v1/1/filter.php?c=$MEAL_PATH_QUERY_PARAM"
 
     val moshi by lazy {
         Moshi.Builder().add(KotlinJsonAdapterFactory()).build()
     }
 
     private val categoryListResponseJsonAdapter = CategoryListResponseJsonAdapter(moshi)
+
+    private val mealListJsonAdapter = MealListResponseJsonAdapter(moshi)
 
     fun provideRetrofit(mockWebServer: MockWebServer): Retrofit {
         return Retrofit.Builder()
@@ -35,7 +41,7 @@ object NetworkUtils {
         return provideRetrofit(mockWebServer).create(MealDbService::class.java)
     }
 
-    fun getMockWebserverDispatcher(): Dispatcher {
+    fun getCategoriesMockWebserverDispatcher(): Dispatcher {
         return object : Dispatcher() {
             override fun dispatch(request: RecordedRequest): MockResponse {
                 return when {
@@ -56,7 +62,30 @@ object NetworkUtils {
                     }
                 }
             }
+        }
+    }
 
+    fun getMealsMockWebserverDispatcher(): Dispatcher {
+        return object : Dispatcher() {
+            override fun dispatch(request: RecordedRequest): MockResponse {
+                return when {
+                    request.path?.contains(MEAL_PATH)!! -> {
+                        val mealListResponse = DataUtils.mealsData.first
+
+                        val successJson = mealListJsonAdapter.toJson(mealListResponse)
+
+
+                        MockResponse().setBody(
+                            successJson
+                        ).setResponseCode(HttpURLConnection.HTTP_OK)
+                    }
+                    else -> {
+                        MockResponse().setBody(
+                            "Content Not Found"
+                        ).setResponseCode(HttpURLConnection.HTTP_NOT_FOUND)
+                    }
+                }
+            }
         }
     }
 }

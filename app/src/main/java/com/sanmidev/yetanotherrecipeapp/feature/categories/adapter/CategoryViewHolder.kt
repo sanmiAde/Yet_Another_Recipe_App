@@ -3,7 +3,7 @@ package com.sanmidev.yetanotherrecipeapp.feature.categories.adapter
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
-import com.sanmidev.yetanotherrecipeapp.data.local.model.CategoryModel
+import com.sanmidev.yetanotherrecipeapp.data.local.model.categoryList.CategoryModel
 import com.sanmidev.yetanotherrecipeapp.databinding.CategoryListItemBinding
 import com.sanmidev.yetanotherrecipeapp.utils.GlideApp
 

@@ -1,7 +1,7 @@
 package com.sanmidev.yetanotherrecipeapp.feature.categories.adapter
 
 import androidx.recyclerview.widget.DiffUtil
-import com.sanmidev.yetanotherrecipeapp.data.local.model.CategoryModel
+import com.sanmidev.yetanotherrecipeapp.data.local.model.categoryList.CategoryModel
 
 
 class CategoryListDiffCallback : DiffUtil.ItemCallback<CategoryModel>() {

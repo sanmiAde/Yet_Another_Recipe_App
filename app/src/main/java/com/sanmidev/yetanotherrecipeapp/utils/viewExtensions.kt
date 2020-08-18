@@ -31,7 +31,6 @@ inline fun View.showIf(condition: (View) -> Boolean) {
         gone()
     }
 }
-
 inline fun View.hideIf(condition: (View) -> Boolean) {
     if (condition(this)) {
         gone()
@@ -43,6 +42,7 @@ inline fun View.hideIf(condition: (View) -> Boolean) {
 inline fun ShimmerFrameLayout.showShimmerIf(condition: (View) -> Boolean) {
     if (condition(this)) {
         startShimmer()
+        visible()
     } else {
         stopShimmer()
         gone()

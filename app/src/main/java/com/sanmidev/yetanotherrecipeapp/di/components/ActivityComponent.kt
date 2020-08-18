@@ -2,6 +2,7 @@ package com.sanmidev.yetanotherrecipeapp.di.components
 
 import com.sanmidev.yetanotherrecipeapp.di.scopes.PerActivityScope
 import com.sanmidev.yetanotherrecipeapp.feature.categories.CategoriesFragment
+import com.sanmidev.yetanotherrecipeapp.feature.meals.MealsFragment
 import dagger.Subcomponent
 
 @PerActivityScope
@@ -9,6 +10,7 @@ import dagger.Subcomponent
 interface ActivityComponent {
 
     fun inject(categoriesFragment: CategoriesFragment)
+    fun inject(mealsFragment: MealsFragment)
 
     @Subcomponent.Factory
     interface Factory {

@@ -1,8 +1,10 @@
 package com.sanmidev.yetanotherrecipeapp.data.remote.repo
 
-import com.sanmidev.yetanotherrecipeapp.data.local.model.CategoryListModel
+import com.sanmidev.yetanotherrecipeapp.data.local.model.category.MealListModel
+import com.sanmidev.yetanotherrecipeapp.data.local.model.categoryList.CategoryListModel
 import com.sanmidev.yetanotherrecipeapp.data.remote.mapper.MealsDBMapper
-import com.sanmidev.yetanotherrecipeapp.data.remote.response.CategoryListResponse
+import com.sanmidev.yetanotherrecipeapp.data.remote.response.categories.CategoryListResponse
+import com.sanmidev.yetanotherrecipeapp.data.remote.response.meals.MealListResponse
 import com.sanmidev.yetanotherrecipeapp.data.remote.services.MealDbService
 import io.reactivex.Single
 import javax.inject.Inject
@@ -20,7 +22,11 @@ class MeallDBRepositoryImpl @Inject constructor(
         }
     }
 
-    //TODO do you need the response body itself. you can simply allow retorfit to parse it for you since you don't need to know the status code
-    //Todo is it posible to use the json file for testing
+    override fun getMeals(category: String): Single<MealListModel> {
+        return mealDbService.getMeals(category).map { mealListReponse: MealListResponse ->
+            mapper.mapMealListReponseToMealListModel(mealListReponse)
+        }
+    }
+
 
 }

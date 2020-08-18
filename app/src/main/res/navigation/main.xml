@@ -12,7 +12,18 @@
         tools:layout="@layout/fragment_categories">
         <action
             android:id="@+id/action_categoriesFragment_to_categoryDescriptionFragment"
-            app:destination="@id/categoryDescriptionFragment" />
+            app:destination="@id/categoryDescriptionFragment"
+            app:enterAnim="@anim/nav_default_enter_anim"
+            app:exitAnim="@anim/nav_default_exit_anim"
+            app:popEnterAnim="@anim/nav_default_pop_enter_anim"
+            app:popExitAnim="@anim/nav_default_pop_exit_anim" />
+        <action
+            android:id="@+id/action_categoriesFragment_to_mealsFragment"
+            app:destination="@id/mealsFragment"
+            app:enterAnim="@anim/fragment_close_enter"
+            app:exitAnim="@anim/fragment_close_exit"
+            app:popEnterAnim="@anim/fragment_close_enter"
+            app:popExitAnim="@anim/fragment_close_exit" />
     </fragment>
     <dialog
         android:id="@+id/categoryDescriptionFragment"
@@ -23,4 +34,13 @@
             android:name="description"
             app:argType="string" />
     </dialog>
+    <fragment
+        android:id="@+id/mealsFragment"
+        android:name="com.sanmidev.yetanotherrecipeapp.feature.meals.MealsFragment"
+        android:label="fragment_meals"
+        tools:layout="@layout/fragment_meals">
+        <argument
+            android:name="name"
+            app:argType="string" />
+    </fragment>
 </navigation>

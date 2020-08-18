@@ -1,4 +1,4 @@
-package com.sanmidev.yetanotherrecipeapp.data.remote.response
+package com.sanmidev.yetanotherrecipeapp.data.remote.response.categories
 
 
 import com.squareup.moshi.Json

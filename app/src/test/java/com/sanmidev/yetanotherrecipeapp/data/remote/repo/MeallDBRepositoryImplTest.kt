@@ -20,7 +20,9 @@ class MeallDBRepositoryImplTest {
     @get:Rule
     val mockWebServer = MockWebServer()
 
-    private lateinit var dispatcher: Dispatcher
+    private lateinit var categoryDispatcher: Dispatcher
+
+    private lateinit var mealDispatcher: Dispatcher
 
     private val compositeDisposable = CompositeDisposable()
 
@@ -28,7 +30,8 @@ class MeallDBRepositoryImplTest {
     fun setUp() {
 
         CUT = RepositoryUtils.provideMealsDbRepostory(mockWebServer)
-        dispatcher = NetworkUtils.getMockWebserverDispatcher()
+        categoryDispatcher = NetworkUtils.getCategoriesMockWebserverDispatcher()
+        mealDispatcher = NetworkUtils.getMealsMockWebserverDispatcher()
     }
 
     @After
@@ -39,7 +42,7 @@ class MeallDBRepositoryImplTest {
     @Test
     fun getCategories_shouldCallCorrectAPI_whenRequestIsMade() {
         //GIVEN
-        mockWebServer.dispatcher = dispatcher
+        mockWebServer.dispatcher = categoryDispatcher
 
         //WHEN
         val testObserver = CUT.getCategories().test()
@@ -58,7 +61,7 @@ class MeallDBRepositoryImplTest {
     @Test
     fun getCategories_shouldReturnListOfCategories_whenRequestIsSuccessful() {
         //GIVEN
-        mockWebServer.dispatcher = dispatcher
+        mockWebServer.dispatcher = categoryDispatcher
         val expectedCategoriesData = DataUtils.categoriesData.second
 
         //WHEN
@@ -72,5 +75,44 @@ class MeallDBRepositoryImplTest {
         Truth.assertThat(categories.categories)
             .containsExactlyElementsIn(expectedCategoriesData.categories)
     }
+
+
+    @Test
+    fun getMeals_shouldCallTheRightAPIWithQueryParams_whenApiIsCalled() {
+        //GIVEN
+        mockWebServer.dispatcher = mealDispatcher
+
+
+        //WHEN
+        val testObserver = CUT.getMeals(NetworkUtils.MEAL_PATH_QUERY_PARAM).test()
+        testObserver.addTo(compositeDisposable)
+        val request = mockWebServer.takeRequest()
+
+        //THEN
+        testObserver.assertNoErrors()
+        testObserver.assertComplete()
+        Truth.assertThat(request.path).isEqualTo(NetworkUtils.MEAL_PATH)
+        Truth.assertThat(request.method).isEqualTo("GET")
+        Truth.assertThat(request.requestUrl!!.querySize).isEqualTo(1)
+    }
+
+
+    @Test
+    fun getMeals_shouldReturnListOfMeals_whenRequestIsSuccessful() {
+        //GIVEN
+        mockWebServer.dispatcher = mealDispatcher
+        val expectedMealModel = DataUtils.mealsData.second
+
+        //WHEN
+        val testObserver = CUT.getMeals(NetworkUtils.MEAL_PATH_QUERY_PARAM).test()
+        testObserver.addTo(compositeDisposable)
+        val actualMeals = testObserver.values()!![0]
+
+        //THEN
+        testObserver.assertNoErrors()
+        testObserver.assertComplete()
+        Truth.assertThat(actualMeals.meals).containsExactlyElementsIn(expectedMealModel.meals)
+    }
+
 
 }

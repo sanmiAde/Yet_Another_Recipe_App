@@ -1,10 +1,10 @@
-package com.sanmidev.yetanotherrecipeapp.feature.categories
+package com.sanmidev.yetanotherrecipeapp.feature.meals
 
 import android.os.Bundle
 import androidx.lifecycle.*
 import androidx.savedstate.SavedStateRegistryOwner
 import com.sanmidev.yetanotherrecipeapp.R
-import com.sanmidev.yetanotherrecipeapp.data.local.model.categoryList.CategoryListModel
+import com.sanmidev.yetanotherrecipeapp.data.local.model.category.MealListModel
 import com.sanmidev.yetanotherrecipeapp.data.remote.repo.MealsDBRepository
 import com.sanmidev.yetanotherrecipeapp.utils.AppScheduler
 import com.sanmidev.yetanotherrecipeapp.utils.Result
@@ -15,7 +15,7 @@ import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.rxkotlin.addTo
 import io.reactivex.rxkotlin.subscribeBy
 
-class CategoriesViewModel(
+class MealsViewModel(
     private val mealsDBRepository: MealsDBRepository,
     private val appScheduler: AppScheduler,
     private val savedStateHandle: SavedStateHandle
@@ -23,57 +23,57 @@ class CategoriesViewModel(
 
     private val compositeDisposable = CompositeDisposable()
 
-    private val categoriesMutableLiveData = MutableLiveData<Result<CategoryListModel>>()
+    private val mealListMutableLiveData = MutableLiveData<Result<MealListModel>>()
 
-    private var categoriesData: CategoryListModel?
+    val mealListLiveData: LiveData<Result<MealListModel>>
+        get() = mealListMutableLiveData
+
+    private var savedMeals: MealListModel?
         set(value) {
-            savedStateHandle.set(CATEGORIES_LIST_KEY, value)
+            savedStateHandle.set(MEALS_LIST_KEY, value)
         }
-        get() {
-            return savedStateHandle.get<CategoryListModel>(CATEGORIES_LIST_KEY)
-        }
+        get() = savedStateHandle.get(MEALS_LIST_KEY)
 
-    val categoriesLiveData: LiveData<Result<CategoryListModel>>
-        get() = categoriesMutableLiveData
 
     init {
+        //Upon initialisation, get the meal list from the saved instance state.
+        //IF a meal list is found, update the mealListMutableLiveData with Result.Success.
+        //If not, get the meals from the API and save it
+        savedMeals?.let {
+            mealListMutableLiveData.value = Result.Success(it)
+        } ?: getMeals()
 
-        //Upon initialisation get the category list data from the [SavedStateHandle].
-        // If a category list has been saved, return it as [LiveData].
-        // if not make an api request to get the list of categories.
-        categoriesData?.let {
-            categoriesMutableLiveData.value = Result.Success(it)
-        } ?: getCategories()
     }
 
-    private fun getCategories() {
 
-        mealsDBRepository.getCategories()
+    private fun getMeals() {
+        val mealName = requireNotNull(savedStateHandle.get<String>(MEAL_LIST_NAME))
+
+        mealsDBRepository.getMeals(mealName)
             .applySchedulers(appScheduler)
             .doOnSubscribe {
-                categoriesMutableLiveData.value = Result.InProgress
-            }
-            .subscribeBy(onSuccess = { categoryListModel: CategoryListModel ->
-                categoriesMutableLiveData.value = Result.Success(categoryListModel)
-                categoriesData = categoryListModel
+                mealListMutableLiveData.value = Result.InProgress
+            }.subscribeBy(onSuccess = {
+                //saved meal list to saved state handle. This is done because of process death.
+                //During process death, this data would be lost.
+                savedMeals = it
+                mealListMutableLiveData.value = Result.Success(it)
+
             }, onError = {
-                categoriesMutableLiveData.value =
-                    Result.Error.NonRecoverableError(R.string.categories_error_txt)
+                mealListMutableLiveData.value =
+                    Result.Error.NonRecoverableError(R.string.meals_list_error_txt)
             }).addTo(compositeDisposable)
     }
 
     fun refresh() {
-        getCategories()
-    }
-
-    override fun onCleared() {
-        compositeDisposable.clear()
-        super.onCleared()
+        getMeals()
     }
 
 
     companion object {
-        const val CATEGORIES_LIST_KEY = "com.sanmidev.yetanotherrecipeapp.categories_list_key"
+        const val MEALS_LIST_KEY = "com.sanmidev.yetanotherrecipeapp.meals_list_key"
+        const val MEAL_LIST_NAME = "com.sanmidev.yetanotherrecipeapp.meals_list_name"
+
     }
 
     class VmFactory @AssistedInject constructor(
@@ -87,7 +87,7 @@ class CategoriesViewModel(
             modelClass: Class<T>,
             handle: SavedStateHandle
         ): T {
-            return CategoriesViewModel(
+            return MealsViewModel(
                 mealsDBRepository,
                 appScheduler,
                 handle
@@ -103,5 +103,4 @@ class CategoriesViewModel(
             ): VmFactory
         }
     }
-
 }

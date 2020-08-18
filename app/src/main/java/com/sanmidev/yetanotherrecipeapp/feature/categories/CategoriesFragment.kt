@@ -10,14 +10,13 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.sanmidev.yetanotherrecipeapp.R
-import com.sanmidev.yetanotherrecipeapp.data.local.model.CategoryListModel
+import com.sanmidev.yetanotherrecipeapp.data.local.model.categoryList.CategoryListModel
 import com.sanmidev.yetanotherrecipeapp.databinding.FragmentCategoriesBinding
 import com.sanmidev.yetanotherrecipeapp.feature.MainActivity
 import com.sanmidev.yetanotherrecipeapp.feature.categories.adapter.CategoryListAdapter
 import com.sanmidev.yetanotherrecipeapp.utils.*
 import io.cabriole.decorator.ColumnProvider
 import io.cabriole.decorator.GridMarginDecoration
-import timber.log.Timber
 import javax.inject.Inject
 
 
@@ -58,13 +57,16 @@ class CategoriesFragment : Fragment(R.layout.fragment_categories) {
         //Adapter
         categoryAdapter = CategoryListAdapter(this.layoutInflater,
             {
-                Timber.d(it.toString())
+                val directions =
+                    CategoriesFragmentDirections.actionCategoriesFragmentToMealsFragment(it.category)
+                navController.navigateSafely(directions)
+
             }, { description: String ->
                 val directions =
                     CategoriesFragmentDirections.actionCategoriesFragmentToCategoryDescriptionFragment(
                         description
                     )
-                navController.navigate(directions)
+                navController.navigateSafely(directions)
             })
 
         //Recyclerview
@@ -81,16 +83,24 @@ class CategoriesFragment : Fragment(R.layout.fragment_categories) {
             this.setHasFixedSize(true)
             this.adapter = categoryAdapter
         }
+
+        //swipe to refresh
+        binding.refresh.setOnRefreshListener {
+            viewModel.refresh()
+            binding.refresh.isRefreshing = false
+        }
     }
 
     private fun observeGetCategoriesLiveData() {
         viewModel.categoriesLiveData.observe(viewLifecycleOwner) { result: Result<CategoryListModel> ->
-            binding.rvCategory.showIf { result is Result.Success }
-            binding.shimmerFrameLayout.showShimmerIf { result is Result.InProgress }
+
+            binding.rvCategory.hideIf { result is Result.InProgress }
+            binding.shimmerLayout.shimmer.showShimmerIf { result is Result.InProgress }
 
             when (result) {
                 is Result.Success -> {
                     categoryAdapter.submitList(result.data.categories.toMutableList())
+
                 }
                 is Result.Error.RecoverableError -> {
                     fireToast(requireContext(), requireContext().getString(result.exceptionId))
