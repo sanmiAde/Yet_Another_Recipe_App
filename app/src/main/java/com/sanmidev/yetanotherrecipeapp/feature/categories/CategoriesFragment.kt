@@ -6,6 +6,7 @@ import android.view.View
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.observe
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.sanmidev.yetanotherrecipeapp.R
@@ -35,6 +36,8 @@ class CategoriesFragment : Fragment(R.layout.fragment_categories) {
     private val viewModel by viewModels<CategoriesViewModel>
     { vmFactory.createFactory(this) }
 
+    private val navController by lazy { findNavController() }
+
     override fun onAttach(context: Context) {
         super.onAttach(context)
         (activity as MainActivity).activityComponent.inject(this)
@@ -51,21 +54,23 @@ class CategoriesFragment : Fragment(R.layout.fragment_categories) {
         observeGetCategoriesLiveData()
     }
 
-    private fun initOnClickListeners() {
-
-    }
-
     private fun initViews() {
         //Adapter
-        categoryAdapter = CategoryListAdapter(this.layoutInflater) {
-            Timber.d(it.toString())
-        }
+        categoryAdapter = CategoryListAdapter(this.layoutInflater,
+            {
+                Timber.d(it.toString())
+            }, { description: String ->
+                val directions =
+                    CategoriesFragmentDirections.actionCategoriesFragmentToCategoryDescriptionFragment(
+                        description
+                    )
+                navController.navigate(directions)
+            })
 
         //Recyclerview
         binding.rvCategory.apply {
 
             val spanCount = context.resources.getInteger(R.integer.recycler_view_span_count)
-
             val margin = context.resources.dpToPx(8)
 
             this.layoutManager = GridLayoutManager(requireContext(), spanCount)
@@ -88,10 +93,10 @@ class CategoriesFragment : Fragment(R.layout.fragment_categories) {
                     categoryAdapter.submitList(result.data.categories.toMutableList())
                 }
                 is Result.Error.RecoverableError -> {
-                    fireToast(requireContext(), result.exception.localizedMessage.toString())
+                    fireToast(requireContext(), requireContext().getString(result.exceptionId))
                 }
                 is Result.Error.NonRecoverableError -> {
-                    fireToast(requireContext(), result.exception.localizedMessage.toString())
+                    fireToast(requireContext(), requireContext().getString(result.exceptionId))
                 }
                 Result.InProgress -> {
                 }

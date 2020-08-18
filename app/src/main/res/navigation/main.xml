@@ -9,5 +9,18 @@
         android:id="@+id/categoriesFragment"
         android:name="com.sanmidev.yetanotherrecipeapp.feature.categories.CategoriesFragment"
         android:label="fragment_categories"
-        tools:layout="@layout/fragment_categories" />
+        tools:layout="@layout/fragment_categories">
+        <action
+            android:id="@+id/action_categoriesFragment_to_categoryDescriptionFragment"
+            app:destination="@id/categoryDescriptionFragment" />
+    </fragment>
+    <dialog
+        android:id="@+id/categoryDescriptionFragment"
+        android:name="com.sanmidev.yetanotherrecipeapp.feature.categories.CategoryDescriptionFragment"
+        android:label="fragment_category_description"
+        tools:layout="@layout/fragment_category_description">
+        <argument
+            android:name="description"
+            app:argType="string" />
+    </dialog>
 </navigation>

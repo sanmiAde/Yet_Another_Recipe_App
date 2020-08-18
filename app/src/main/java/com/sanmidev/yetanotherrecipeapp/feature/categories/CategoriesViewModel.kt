@@ -1,6 +1,5 @@
 package com.sanmidev.yetanotherrecipeapp.feature.categories
 
-import android.app.Application
 import android.os.Bundle
 import androidx.lifecycle.*
 import androidx.savedstate.SavedStateRegistryOwner
@@ -17,11 +16,10 @@ import io.reactivex.rxkotlin.addTo
 import io.reactivex.rxkotlin.subscribeBy
 
 class CategoriesViewModel(
-    private val context: Application,
     private val mealsDBRepository: MealsDBRepository,
     private val appScheduler: AppScheduler,
     private val savedStateHandle: SavedStateHandle
-) : AndroidViewModel(context) {
+) : ViewModel() {
 
     private val compositeDisposable = CompositeDisposable()
 
@@ -39,6 +37,10 @@ class CategoriesViewModel(
         get() = categoriesMutableLiveData
 
     init {
+
+        //Upon initialisation get the category list data from the [SavedStateHandle].
+        // If a category list has been saved, return it as [LiveData].
+        // if not make an api request to get the list of categories.
         categoriesData?.let {
             categoriesMutableLiveData.value = Result.Success(it)
         } ?: getCategories()
@@ -55,13 +57,8 @@ class CategoriesViewModel(
                 categoriesMutableLiveData.value = Result.Success(categoryListModel)
                 categoriesData = categoryListModel
             }, onError = {
-                categoriesMutableLiveData.value = Result.Error.NonRecoverableError(
-                    Exception(
-                        context.getString(
-                            R.string.categories_error_txt
-                        )
-                    )
-                )
+                categoriesMutableLiveData.value =
+                    Result.Error.NonRecoverableError(R.string.categories_error_txt)
             }).addTo(compositeDisposable)
     }
 
@@ -75,7 +72,6 @@ class CategoriesViewModel(
     }
 
     class VmFactory @AssistedInject constructor(
-        private val context: Application,
         private val mealsDBRepository: MealsDBRepository,
         private val appScheduler: AppScheduler,
         @Assisted savedStateRegistryOwner: SavedStateRegistryOwner,
@@ -87,7 +83,6 @@ class CategoriesViewModel(
             handle: SavedStateHandle
         ): T {
             return CategoriesViewModel(
-                context,
                 mealsDBRepository,
                 appScheduler,
                 handle

@@ -6,11 +6,13 @@ import androidx.recyclerview.widget.ListAdapter
 import com.sanmidev.yetanotherrecipeapp.data.local.model.CategoryModel
 import com.sanmidev.yetanotherrecipeapp.databinding.CategoryListItemBinding
 
-typealias CategoryItemOnClickCallback = (CategoryModel) -> Unit
+typealias CategoryImageOnClickCallback = (CategoryModel) -> Unit
+typealias CategoryDescIconOnClickCallback = (String) -> Unit
 
 class CategoryListAdapter(
     private val layoutInflater: LayoutInflater,
-    private val callback: CategoryItemOnClickCallback
+    private val onImageClickcallback: CategoryImageOnClickCallback,
+    private val onDescIconClickCallback: CategoryDescIconOnClickCallback
 ) : ListAdapter<CategoryModel, CategoryViewHolder>(
     CategoryListDiffCallback()
 ) {
@@ -22,8 +24,12 @@ class CategoryListAdapter(
         val viewholder = CategoryViewHolder(
             binding
         )
-        binding.root.setOnClickListener {
-            callback.invoke(getItem(viewholder.adapterPosition))
+        binding.imgCategory.setOnClickListener {
+            onImageClickcallback.invoke(getItem(viewholder.adapterPosition))
+        }
+
+        binding.imgDesc.setOnClickListener {
+            onDescIconClickCallback.invoke(getItem(viewholder.adapterPosition).description)
         }
 
         return viewholder

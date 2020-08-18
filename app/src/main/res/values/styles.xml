@@ -10,4 +10,21 @@
         <item name="titleTextAppearance">@style/TextAppearance.YetAnotherRecipeApp.Headline6</item>
     </style>
 
+    <style name="Widget.YetAnotherRecipeApp.BottomSheet.ShapeAppearanceOverlay" parent="">
+        <item name="cornerFamilyTopRight">rounded</item>
+        <item name="cornerFamilyTopLeft">rounded</item>
+        <item name="cornerSizeTopLeft">@dimen/sixteen</item>
+        <item name="cornerSizeTopRight">@dimen/sixteen</item>
+    </style>
+
+    <style name="Widget.YetAnotherRecipeApp.BottomSheet" parent="Widget.MaterialComponents.BottomSheet">
+        <item name="shapeAppearanceOverlay">
+            @style/Widget.YetAnotherRecipeApp.BottomSheet.ShapeAppearanceOverlay
+        </item>
+    </style>
+
+    <style name="ThemeOverlay.YetAnotherRecipeApp.BottomSheetDialog" parent="@style/ThemeOverlay.MaterialComponents.BottomSheetDialog">
+        <item name="bottomSheetStyle">@style/Widget.YetAnotherRecipeApp.BottomSheet</item>
+    </style>
+
 </resources>

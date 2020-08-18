@@ -56,6 +56,9 @@
         <!--Components -->
         <item name="textInputStyle">@style/Widget.YetAnotherRecipeApp.TextInputLayout</item>
         <item name="toolbarStyle">@style/Widget.YetAnotherRecipeApp.Toolbar</item>
+        <item name="bottomSheetDialogTheme">
+            @style/ThemeOverlay.YetAnotherRecipeApp.BottomSheetDialog
+        </item>
     </style>
 
 

@@ -18,6 +18,16 @@
             android:layout_height="match_parent">
 
             <ImageView
+                android:id="@+id/img_desc"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintBottom_toBottomOf="@+id/txt_category_name"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/txt_category_name"
+                app:layout_constraintTop_toTopOf="@+id/txt_category_name"
+                app:srcCompat="@drawable/ic_baseline_info_24" />
+
+            <ImageView
                 android:id="@+id/img_category"
                 android:layout_width="0dp"
                 android:layout_height="0dp"
