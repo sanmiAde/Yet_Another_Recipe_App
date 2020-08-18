@@ -21,9 +21,9 @@
                 android:id="@+id/img_desc"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginEnd="16dp"
                 app:layout_constraintBottom_toBottomOf="@+id/txt_category_name"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@+id/txt_category_name"
                 app:layout_constraintTop_toTopOf="@+id/txt_category_name"
                 app:srcCompat="@drawable/ic_baseline_info_24" />
 
@@ -41,14 +41,16 @@
 
             <TextView
                 android:id="@+id/txt_category_name"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginEnd="8dp"
                 android:layout_marginBottom="@dimen/eight"
                 android:text="TextView"
                 android:textAppearance="@style/TextAppearance.YetAnotherRecipeApp.Body1"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent" />
+                app:layout_constraintEnd_toStartOf="@+id/img_desc"
+                app:layout_constraintStart_toStartOf="@+id/img_category" />
         </androidx.constraintlayout.widget.ConstraintLayout>
     </com.google.android.material.card.MaterialCardView>
 </androidx.constraintlayout.widget.ConstraintLayout>

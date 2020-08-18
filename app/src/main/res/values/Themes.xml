@@ -59,6 +59,7 @@
         <item name="bottomSheetDialogTheme">
             @style/ThemeOverlay.YetAnotherRecipeApp.BottomSheetDialog
         </item>
+        <item name="materialCardViewStyle">@style/Widget.YetAnotherRecipeApp.MaterialCardView</item>
     </style>
 
 

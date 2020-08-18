@@ -6,7 +6,7 @@
 
     <style name="Widget.YetAnotherRecipeApp.Toolbar" parent="Widget.MaterialComponents.Toolbar">
         <item name="background">@color/colour_white_900</item>
-        <item name="elevation">@dimen/eight</item>
+<!--        <item name="android:elevation">@dimen/two</item>-->
         <item name="titleTextAppearance">@style/TextAppearance.YetAnotherRecipeApp.Headline6</item>
     </style>
 
@@ -25,6 +25,13 @@
 
     <style name="ThemeOverlay.YetAnotherRecipeApp.BottomSheetDialog" parent="@style/ThemeOverlay.MaterialComponents.BottomSheetDialog">
         <item name="bottomSheetStyle">@style/Widget.YetAnotherRecipeApp.BottomSheet</item>
+    </style>
+
+    <style name="Widget.YetAnotherRecipeApp.MaterialCardView" parent="Widget.MaterialComponents.CardView">
+        <item name="android:focusable">true</item>
+        <item name="android:clickable">true</item>
+        <item name="cardElevation">@dimen/four</item>
+        <item name="cardUseCompatPadding">true</item>
     </style>
 
 </resources>

@@ -9,6 +9,7 @@ import com.sanmidev.yetanotherrecipeapp.data.remote.response.CategoryResponse
 object DataUtils {
 
     private val faker by lazy { Faker() }
+
     val categoriesData = provideCategories()
 
     fun provideCategory(): Pair<CategoryResponse, CategoryModel> {

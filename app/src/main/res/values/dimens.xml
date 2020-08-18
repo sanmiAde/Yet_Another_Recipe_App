@@ -2,6 +2,7 @@
 <resources>
     <dimen name="zero">0dp</dimen>
     <dimen name="eight">8dp</dimen>
+    <dimen name="four">4dp</dimen>
     <dimen name="sixteen">16dp</dimen>
     <dimen name="twentyfour">24dp</dimen>
     <dimen name="card_height">200dp</dimen>
